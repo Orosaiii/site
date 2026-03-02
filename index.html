@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>С Днём Рождения, Овсянка! 🎉</title>
     <style>
         /* Сбрасываем отступы и подключаем красивый шрифт */
@@ -10,9 +10,16 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent; /* Убираем серый фон при тапе на мобильных */
         }
 
         @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap');
+
+        html, body {
+            width: 100%;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
         body {
             min-height: 100vh;
@@ -25,8 +32,7 @@
             background-size: 400% 400%;
             animation: bgShift 18s ease infinite;
             position: relative;
-            overflow-x: hidden;
-            padding: 12px;
+            padding: 10px;
         }
 
         /* Анимация плавного смещения градиента */
@@ -36,14 +42,14 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Дополнительный слой для мягких бликов (более приглушённые) */
+        /* Дополнительный слой для мягких бликов */
         .blob {
             position: absolute;
-            width: 300px;
-            height: 300px;
+            width: min(300px, 60vw);
+            height: min(300px, 60vw);
             background: rgba(130, 100, 140, 0.25);
             border-radius: 70% 30% 60% 40% / 40% 60% 30% 70%;
-            filter: blur(60px);
+            filter: blur(min(60px, 8vw));
             animation: floatBlob 20s infinite alternate ease-in-out;
             z-index: 0;
         }
@@ -52,8 +58,8 @@
             top: -50px;
             left: -50px;
             background: rgba(110, 70, 130, 0.3);
-            width: 450px;
-            height: 450px;
+            width: min(450px, 80vw);
+            height: min(450px, 80vw);
             animation-duration: 24s;
         }
 
@@ -61,8 +67,8 @@
             bottom: -70px;
             right: -30px;
             background: rgba(40, 90, 100, 0.35);
-            width: 550px;
-            height: 550px;
+            width: min(550px, 90vw);
+            height: min(550px, 90vw);
             animation-duration: 28s;
             animation-delay: -5s;
         }
@@ -71,15 +77,15 @@
             top: 40%;
             left: 60%;
             background: rgba(95, 65, 110, 0.3);
-            width: 400px;
-            height: 400px;
+            width: min(400px, 70vw);
+            height: min(400px, 70vw);
             animation-duration: 22s;
             animation-delay: -2s;
         }
 
         @keyframes floatBlob {
             0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-            100% { transform: translate(50px, -30px) scale(1.15) rotate(8deg); }
+            100% { transform: translate(min(50px, 5vw), min(-30px, -3vh)) scale(1.15) rotate(8deg); }
         }
 
         /* Главная карточка с поздравлением */
@@ -88,15 +94,16 @@
             z-index: 10;
             max-width: 800px;
             width: 100%;
-            background: rgba(30, 25, 35, 0.45);
+            background: rgba(30, 25, 35, 0.5);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border-radius: 48px 16px 48px 16px;
+            border-radius: min(48px, 8vw) min(16px, 3vw) min(48px, 8vw) min(16px, 3vw);
             box-shadow: 0 25px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(230, 210, 255, 0.2) inset;
-            padding: 30px 20px;
+            padding: clamp(20px, 5vw, 40px) clamp(16px, 4vw, 32px);
             text-align: center;
             border: 1px solid rgba(220, 190, 255, 0.2);
             animation: cardAppear 1.4s cubic-bezier(0.23, 1, 0.32, 1);
+            margin: 5px;
         }
 
         @keyframes cardAppear {
@@ -104,14 +111,14 @@
             100% { opacity: 1; transform: scale(1) translateY(0); }
         }
 
-        /* Стили для надписи "Овсянка" — более мягкое, но читаемое свечение */
+        /* Стили для надписи "Овсянка" */
         .main-message {
-            font-size: clamp(2.2rem, 12vw, 5rem);
+            font-size: clamp(2rem, 11vw, 5rem);
             font-weight: 700;
             color: #f7efe2;
             text-shadow: 0 0 8px #d4a1c9, 2px 4px 10px #1f0f1a, 0 0 20px #b17e9f;
             letter-spacing: -0.02em;
-            margin-bottom: 12px;
+            margin-bottom: clamp(8px, 2vh, 16px);
             line-height: 1.2;
             word-break: break-word;
             animation: gentleFloat 4s infinite alternate ease-in-out;
@@ -119,21 +126,22 @@
 
         @keyframes gentleFloat {
             0% { transform: translateY(0) scale(1); text-shadow: 0 0 8px #d4a1c9, 2px 4px 12px #1f0f1a; }
-            100% { transform: translateY(-8px) scale(1.02); text-shadow: 0 0 15px #edc4dc, 4px 6px 15px #23121f; }
+            100% { transform: translateY(min(-8px, -1vh)) scale(1.02); text-shadow: 0 0 15px #edc4dc, 4px 6px 15px #23121f; }
         }
 
-        /* Подпись "С днём рождения" с мягким мерцанием */
+        /* Подпись "С днём рождения" */
         .sub-message {
-            font-size: clamp(1.5rem, 7vw, 2.5rem);
+            font-size: clamp(1.3rem, 6vw, 2.5rem);
             font-weight: 600;
             color: #fbefdb;
-            background: rgba(45, 35, 55, 0.5);
+            background: rgba(45, 35, 55, 0.6);
             backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             display: inline-block;
-            padding: 8px 24px;
+            padding: clamp(6px, 2vw, 8px) clamp(20px, 6vw, 32px);
             border-radius: 60px;
-            margin-top: 12px;
-            margin-bottom: 24px;
+            margin-top: clamp(8px, 2vh, 16px);
+            margin-bottom: clamp(16px, 3vh, 24px);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 220, 240, 0.25);
             border: 1px solid rgba(255, 210, 240, 0.3);
             transform: rotate(-0.5deg);
@@ -141,11 +149,13 @@
             transition: all 0.2s ease;
             cursor: pointer;
             -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            min-width: 160px;
         }
 
         .sub-message:active {
             transform: scale(0.97) rotate(-0.5deg);
-            background: rgba(65, 50, 75, 0.6);
+            background: rgba(65, 50, 75, 0.7);
         }
 
         @keyframes softGlow {
@@ -153,23 +163,24 @@
             100% { box-shadow: 0 8px 30px #311f2b, 0 0 0 3px rgba(245, 200, 240, 0.3); }
         }
 
-        /* Декоративные элементы: падающие символы на тёмном фоне */
+        /* Декоративные элементы: падающие символы */
         .floating-oat {
             position: absolute;
-            font-size: clamp(1.8rem, 5vw, 2.6rem);
-            opacity: 0.35;
+            font-size: clamp(1.4rem, 5vw, 2.4rem);
+            opacity: 0.3;
             user-select: none;
             pointer-events: none;
             z-index: 5;
             animation: floatAround 18s infinite linear;
             filter: drop-shadow(0 0 12px #bba6d0);
             color: #ece3ff;
+            will-change: transform;
         }
 
         @keyframes floatAround {
             0% { transform: translateY(110vh) rotate(0deg) scale(0.6); opacity: 0; }
-            10% { opacity: 0.4; }
-            90% { opacity: 0.35; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
             100% { transform: translateY(-20vh) rotate(340deg) scale(1.1); opacity: 0; }
         }
 
@@ -177,35 +188,38 @@
         .emoji-cloud {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            font-size: clamp(2rem, 8vw, 2.8rem);
-            margin: 20px 0 8px;
+            gap: clamp(10px, 3vw, 20px);
+            font-size: clamp(1.8rem, 7vw, 2.8rem);
+            margin: clamp(12px, 3vh, 24px) 0 clamp(5px, 1vh, 10px);
             filter: drop-shadow(0 0 18px #ab7ea5);
             animation: sway 3s infinite alternate ease-in-out;
             flex-wrap: wrap;
+            padding: 0 5px;
         }
 
         @keyframes sway {
-            0% { transform: translateX(-6px); }
-            100% { transform: translateX(6px); }
+            0% { transform: translateX(-4px); }
+            100% { transform: translateX(4px); }
         }
 
         /* Дополнительный тёплый текст */
         .cozy-message {
-            font-size: clamp(1.1rem, 4vw, 1.5rem);
-            margin: 20px 0 5px;
+            font-size: clamp(1rem, 3.8vw, 1.5rem);
+            margin: clamp(12px, 3vh, 24px) 0 0;
             color: #e4d7cd;
             font-weight: 600;
-            background: rgba(20, 15, 25, 0.5);
+            background: rgba(20, 15, 25, 0.6);
             backdrop-filter: blur(4px);
-            padding: 16px 12px;
-            border-radius: 40px;
+            -webkit-backdrop-filter: blur(4px);
+            padding: clamp(12px, 3vh, 18px) clamp(10px, 3vw, 16px);
+            border-radius: min(40px, 6vw);
             border: 1px solid rgba(230, 200, 240, 0.2);
             line-height: 1.4;
             box-shadow: inset 0 0 20px rgba(0,0,0,0.4);
+            word-break: break-word;
         }
 
-        /* Стиль для появляющейся надписи МЯУ */
+        /* Стиль для появляющейся надписи МЯУ (уменьшенная) */
         .meow-overlay {
             position: fixed;
             top: 0;
@@ -218,7 +232,7 @@
             pointer-events: none;
             z-index: 100;
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.2s ease;
         }
 
         .meow-overlay.show {
@@ -226,33 +240,64 @@
         }
 
         .meow-text {
-            font-size: clamp(4rem, 25vw, 12rem);
+            font-size: clamp(3rem, 18vw, 7rem); /* Уменьшили с 12rem до 7rem */
             font-weight: 800;
             color: #ffdbad;
-            text-shadow: 0 0 30px #d48eb9, 0 0 60px #b96f9f, 4px 10px 20px black;
-            animation: meowPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            text-shadow: 0 0 20px #d48eb9, 0 0 40px #b96f9f, 2px 4px 10px rgba(0,0,0,0.5);
+            animation: meowPop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
             transform: scale(0);
-            background: rgba(0,0,0,0.2);
+            background: rgba(0,0,0,0.15);
             backdrop-filter: blur(4px);
-            padding: 0.2em 0.5em;
+            -webkit-backdrop-filter: blur(4px);
+            padding: 0.1em 0.4em;
             border-radius: 200px;
             line-height: 1.2;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.05em;
+            border: 1px solid rgba(255, 230, 200, 0.2);
         }
 
         @keyframes meowPop {
             0% { transform: scale(0); opacity: 0; }
-            50% { transform: scale(1.2); opacity: 1; }
+            60% { transform: scale(1.1); opacity: 1; }
             100% { transform: scale(1); opacity: 1; }
         }
 
         .meow-overlay.hide .meow-text {
-            animation: meowFade 0.3s ease forwards;
+            animation: meowFade 0.25s ease forwards;
         }
 
         @keyframes meowFade {
             0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(0.7); opacity: 0; }
+        }
+
+        /* Оптимизация для очень маленьких экранов */
+        @media (max-width: 380px) {
+            .card {
+                padding: 16px 12px;
+            }
+            .emoji-cloud {
+                gap: 8px;
+            }
+            .sub-message {
+                min-width: 130px;
+            }
+        }
+
+        /* Для устройств с большими пальцами, увеличиваем область нажатия */
+        .sub-message::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            display: none; /* По умолчанию скрыто, но это увеличивает область нажатия невидимо */
+        }
+
+        /* Улучшаем производительность анимаций */
+        .card, .blob, .floating-oat {
+            will-change: transform;
         }
     </style>
 </head>
@@ -262,17 +307,15 @@
     <div class="blob"></div>
     <div class="blob"></div>
 
-    <!-- Парящие символы (овсянка и всё тёплое) -->
-    <div class="floating-oat" style="left: 8%; animation-delay: 0s;">🥣</div>
-    <div class="floating-oat" style="left: 18%; animation-delay: 2.5s;">✨</div>
-    <div class="floating-oat" style="left: 32%; animation-delay: 1.2s;">💖</div>
-    <div class="floating-oat" style="left: 50%; animation-delay: 4s;">🌾</div>
-    <div class="floating-oat" style="left: 70%; animation-delay: 2s;">🫐</div>
-    <div class="floating-oat" style="left: 85%; animation-delay: 3.5s;">🍯</div>
-    <div class="floating-oat" style="left: 42%; animation-delay: 5s;">🥛</div>
-    <div class="floating-oat" style="left: 15%; animation-delay: 0.8s;">⭐</div>
-    <div class="floating-oat" style="left: 92%; animation-delay: 6s;">🌸</div>
-    <div class="floating-oat" style="left: 63%; animation-delay: 1.8s;">☁️</div>
+    <!-- Парящие символы (меньше штук для мобильной производительности) -->
+    <div class="floating-oat" style="left: 5%; animation-delay: 0s;">🥣</div>
+    <div class="floating-oat" style="left: 15%; animation-delay: 2.5s;">✨</div>
+    <div class="floating-oat" style="left: 25%; animation-delay: 1.2s;">💖</div>
+    <div class="floating-oat" style="left: 40%; animation-delay: 4s;">🌾</div>
+    <div class="floating-oat" style="left: 60%; animation-delay: 2s;">🫐</div>
+    <div class="floating-oat" style="left: 75%; animation-delay: 3.5s;">🍯</div>
+    <div class="floating-oat" style="left: 85%; animation-delay: 5s;">🥛</div>
+    <div class="floating-oat" style="left: 95%; animation-delay: 1.8s;">🌸</div>
 
     <!-- Основная карточка -->
     <div class="card">
@@ -280,20 +323,20 @@
             С днём рождения, <br> Овсянка!
         </div>
         <div class="emoji-cloud">
-            <span>❤️</span>
-            <span>❤️</span>
-            <span>❤️</span>
-            <span>❤️</span>
-            <span>❤️</span>
+            <span>🥣</span>
+            <span>✨</span>
+            <span>💫</span>
+            <span>🌸</span>
+            <span>🌙</span>
         </div>
         
-        <!-- Теперь это кликабельная кнопка -->
+        <!-- Кликабельная надпись Лиза -->
         <div class="sub-message" id="lisaButton">
             Лиза ❤️
         </div>
 
         <div class="cozy-message">
-            Ля-ля-ля<br> ля-ля-ля
+            Пусть каждый день будет таким же<br> тёплым и уютным, как тарелка овсянки.
         </div>
     </div>
 
@@ -306,55 +349,60 @@
         (function() {
             const lisaButton = document.getElementById('lisaButton');
             const meowOverlay = document.getElementById('meowOverlay');
-            
-            // Переменная для таймера автоматического скрытия
             let hideTimeout = null;
+            let animationFrame = null;
             
-            // Функция показа МЯУ
             function showMeow() {
-                // Если уже есть активный таймер скрытия, отменяем его
+                // Отменяем предыдущие таймеры
                 if (hideTimeout) {
                     clearTimeout(hideTimeout);
                     hideTimeout = null;
                 }
                 
-                // Убираем предыдущий показ, если был
+                if (animationFrame) {
+                    cancelAnimationFrame(animationFrame);
+                }
+                
+                // Сбрасываем классы
                 meowOverlay.classList.remove('show', 'hide');
                 
-                // Принудительный reflow для перезапуска анимации
-                void meowOverlay.offsetWidth;
-                
-                // Показываем
-                meowOverlay.classList.add('show');
-                
-                // Ставим таймер на скрытие через 1.2 секунды
-                hideTimeout = setTimeout(() => {
-                    meowOverlay.classList.add('hide');
+                // Используем requestAnimationFrame для плавности
+                animationFrame = requestAnimationFrame(() => {
+                    meowOverlay.classList.add('show');
                     
-                    // После завершения анимации скрытия убираем классы
-                    setTimeout(() => {
-                        meowOverlay.classList.remove('show', 'hide');
-                    }, 300); // Длительность анимации скрытия
+                    // Таймер на скрытие
+                    hideTimeout = setTimeout(() => {
+                        meowOverlay.classList.add('hide');
+                        
+                        // Убираем классы после анимации
+                        setTimeout(() => {
+                            meowOverlay.classList.remove('show', 'hide');
+                        }, 250);
+                        
+                        hideTimeout = null;
+                    }, 1000); // Показываем чуть меньше времени
                     
-                    hideTimeout = null;
-                }, 1200);
+                    animationFrame = null;
+                });
             }
             
-            // Обработчик события клика (и для мыши, и для касания)
+            // Обработчики событий
             lisaButton.addEventListener('click', function(e) {
-                e.preventDefault(); // На всякий случай
+                e.preventDefault();
                 showMeow();
             });
             
-            // Для мобильных устройств добавим touch-событие, чтобы избежать задержек
+            // Для мобильных устройств
             lisaButton.addEventListener('touchstart', function(e) {
-                e.preventDefault(); // Предотвращаем возможное всплытие или масштабирование
+                e.preventDefault();
                 showMeow();
             }, { passive: false });
             
-            // Адаптация: убираем возможные конфликты с масштабированием
-            window.addEventListener('touchmove', function() {
-                // ничего не делаем, просто не даем зуму мешать
+            // Отключаем двойной тап для зума
+            document.addEventListener('touchstart', function(e) {
+                if (e.target.closest('.sub-message')) {
+                    e.preventDefault();
+                }
             }, { passive: false });
             
         })();
